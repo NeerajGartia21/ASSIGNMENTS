@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" name="" id="input">
+    <button id="submit">Get Flattened JSON</button>
+    <div id="output"></div>
+</body>
+<script>
+    const flattenJson = (obj = {}, output = {}, extraKey = '') => {
+    for(key in obj){
+       if(typeof obj[key] !== 'object'){
+          output[extraKey + key] = obj[key];
+       }else{
+          flattenJson(obj[key], output, `${extraKey}${key}.`);
+       };
+    };
+    return output;
+    };
+    
+
+    document.getElementById('submit').addEventListener('click',function(){
+        // console.log(typeof(JSON.parse(document.getElementById('input').value)));
+        // console.log(document.getElementById('input').value);
+        const output=flattenJson(JSON.parse(document.getElementById('input').value));
+        document.getElementById('output').innerHTML=JSON.stringify(output,null,4);
+    })
+</script>
+</html>
