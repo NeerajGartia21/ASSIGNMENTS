@@ -7,28 +7,64 @@
     <title>Document</title>
 </head>
 <body>
-    <input type="text" name="" id="input">
-    <button id="submit">Get Flattened JSON</button>
-    <div id="output"></div>
+    <textarea name="" id="input" cols="30" rows="10"></textarea>
+    <button id="get2DArray">Get 2D Array</button>
+    <div>
+        <table id="output">
+            <tr>
+                <th>Depth</th>
+                <th>Parent</th>
+                <th>Entity</th>
+                <th>Type</th>
+                <th>Value</th>
+            </tr>
+        </table>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div>
+        <h2>Sample JSON</h2>
+        <div>
+            {
+                "quiz": {
+                    "sport": {
+                        "q1": {
+                            "question": "Which one is correct team name in NBA?",
+                            "options": [
+                                "New York Bulls",
+                                "Los Angeles Kings",
+                                "Golden State Warriros"
+                            ],
+                            "answer": "Huston Rocket"
+                        }
+                    },"maths": {
+                        "q1": {
+                            "question": "5 + 7 = ?",
+                            "options": [
+                                "10",
+                                "11",
+                                "12",
+                                "13"
+                            ],
+                            "answer": "12"
+                        },
+                        "q2": {
+                            "question": "12 - 8 = ?",
+                            "options": [
+                                "1",
+                                "2",
+                                "3",
+                                "4"
+                            ],
+                            "answer": "4"
+                        }
+                    }
+                }
+            }            
+        </div>
+    </div>
 </body>
-<script>
-    const flattenJson = (obj = {}, output = {}, extraKey = '') => {
-    for(key in obj){
-       if(typeof obj[key] !== 'object'){
-          output[extraKey + key] = obj[key];
-       }else{
-          flattenJson(obj[key], output, `${extraKey}${key}.`);
-       };
-    };
-    return output;
-    };
-    
-
-    document.getElementById('submit').addEventListener('click',function(){
-        // console.log(typeof(JSON.parse(document.getElementById('input').value)));
-        // console.log(document.getElementById('input').value);
-        const output=flattenJson(JSON.parse(document.getElementById('input').value));
-        document.getElementById('output').innerHTML=JSON.stringify(output,null,4);
-    })
-</script>
+<script src="./script.js"></script>
 </html>
